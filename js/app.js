@@ -23,6 +23,7 @@
  *
  */
 // determine if an element is in viewport function
+// consulted stack overflow for how to do this
 function isInViewport(el) {
   const rect = el.getBoundingClientRect();
   const windowHeight =
@@ -42,6 +43,7 @@ function isInViewport(el) {
  */
 
 // build the nav
+// consulted stack overflow for how to do this
 const sections = document.querySelectorAll("section");
 let navBar = "";
 for (let i = 0; i < sections.length; i++) {
@@ -82,6 +84,7 @@ document.querySelectorAll(".menu__link").forEach(function (el) {
  *
  */
 // make navbar dissapear when scrolling down
+// consulted stack overflow for how to do this
 const nav = document.querySelector("#navbar__list");
 let updatedScrollY = window.scrollY;
 window.addEventListener("scroll", () => {
