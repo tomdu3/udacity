@@ -1,4 +1,4 @@
-# Landing Page Project
+# Landing Page Project - Tomislav Dukez
 
 ## Table of Contents
 
