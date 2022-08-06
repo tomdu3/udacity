@@ -19,23 +19,16 @@
  */
 
 /**
- * Define Global Variables
- *
- */
-
-/**
- * End Global Variables
  * Start Helper Functions
  *
  */
+// determine if an element is in viewport function
 function isInViewport(el) {
   const rect = el.getBoundingClientRect();
-  // DOMRect { x: 8, y: 8, width: 100, height: 100, top: 8, right: 108, bottom: 108, left: 8 }
   const windowHeight =
     window.innerHeight || document.documentElement.clientHeight;
   const windowWidth = window.innerWidth || document.documentElement.clientWidth;
 
-  // http://stackoverflow.com/questions/325933/determine-whether-two-date-ranges-overlap
   const vertInView = rect.top <= windowHeight && rect.top + rect.height >= 0;
   const horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
 
@@ -88,9 +81,16 @@ document.querySelectorAll(".menu__link").forEach(function (el) {
  * Begin Events
  *
  */
+// make navbar dissapear when scrolling down
+const nav = document.querySelector("#navbar__list");
+let updatedScrollY = window.scrollY;
+window.addEventListener("scroll", () => {
+  if (updatedScrollY < window.scrollY) {
+    nav.style.display = "none";
+  } else {
+    nav.style.display = "block";
+  }
+  updatedScrollY = window.scrollY;
+});
 
-// Build menu
-
-// Scroll to section on link click
-
-// Set sections as active
+// end events
