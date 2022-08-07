@@ -88,6 +88,9 @@ section {
     transition: ease 0.3s all;
 }
 
+.active {
+    background: linear-gradient(to right top, #269691, #179ca6, #1ea1bb, #39a5cd, #59a7db, #5eafe5, #64b7ee, #69bff8, #52cffe, #41dfff, #46eefa, #5ffbf1);
+}
 /* Header Styles */
 .page__header {
     background: #fff;

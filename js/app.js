@@ -19,21 +19,32 @@
  */
 
 /**
+ * Define Global Variables
+ *
+ */
+let navBar = "";
+let selectedNavLink;
+/**
+ * End Global Variables
  * Start Helper Functions
  *
  */
-// determine if an element is in viewport function
-// consulted stack overflow for how to do this
-function isInViewport(el) {
-  const rect = el.getBoundingClientRect();
-  const windowHeight =
-    window.innerHeight || document.documentElement.clientHeight;
-  const windowWidth = window.innerWidth || document.documentElement.clientWidth;
-
-  const vertInView = rect.top <= windowHeight && rect.top + rect.height >= 0;
-  const horInView = rect.left <= windowWidth && rect.left + rect.width >= 0;
-
-  return vertInView && horInView;
+// Add class 'active' to section when it is near top of viewport
+function makeActive() {
+  for (const section of sections) {
+    selectedNavLink = document.querySelector(`.menu__link.${section.id}`);
+    const rect = section.getBoundingClientRect();
+    // You can play with the values in the "if" condition to further make it more accurate.
+    if (rect.top <= 150 && rect.bottom >= 150) {
+      // Apply active state on the current section and the corresponding Nav link.
+      section.classList.add("your-active-class");
+      selectedNavLink.classList.add("active");
+    } else {
+      // Remove active state from other section and corresponding Nav link.
+      section.classList.remove("your-active-class");
+      selectedNavLink.classList.remove("active");
+    }
+  }
 }
 
 /**
@@ -43,28 +54,15 @@ function isInViewport(el) {
  */
 
 // build the nav
-// consulted stack overflow for how to do this
 const sections = document.querySelectorAll("section");
-let navBar = "";
 for (let i = 0; i < sections.length; i++) {
-  navBar += `<li><a class="menu__link" href="#${sections[i].id}">${sections[i].dataset.nav}</a></li>`;
+  navBar += `<li><a class="menu__link ${sections[i].id}" href="#${sections[i].id}">${sections[i].dataset.nav}</a></li>`;
 }
-console.log(navBar);
 document.querySelector("#navbar__list").innerHTML = navBar;
 
-// Add class 'active' to section when near top of viewport
+// Add class 'active' to the navbar and to the section when near top of viewport
 document.addEventListener("scroll", function () {
-  for (let i = 0; i < sections.length; i++) {
-    if (
-      isInViewport(
-        sections[i].firstChild.nextElementSibling.firstChild.nextElementSibling
-      )
-    ) {
-      sections[i].classList.add("your-active-class");
-    } else {
-      sections[i].classList.remove("your-active-class");
-    }
-  }
+  makeActive();
 });
 
 // Scroll to anchor ID using scrollTO event
@@ -73,7 +71,7 @@ document.querySelectorAll(".menu__link").forEach(function (el) {
     event.preventDefault();
     document.querySelector(el.hash).scrollIntoView({
       behavior: "smooth",
-      block: "start",
+      block: "center",
     });
   });
 });
@@ -83,17 +81,9 @@ document.querySelectorAll(".menu__link").forEach(function (el) {
  * Begin Events
  *
  */
-// make navbar dissapear when scrolling down
-// consulted stack overflow for how to do this
-const nav = document.querySelector("#navbar__list");
-let updatedScrollY = window.scrollY;
-window.addEventListener("scroll", () => {
-  if (updatedScrollY < window.scrollY) {
-    nav.style.display = "none";
-  } else {
-    nav.style.display = "block";
-  }
-  updatedScrollY = window.scrollY;
-});
 
-// end events
+// Build menu
+
+// Scroll to section on link click
+
+// Set sections as active
